@@ -1,4 +1,3 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-console.log("working");
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=sort2.js.map
