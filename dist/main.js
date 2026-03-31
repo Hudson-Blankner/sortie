@@ -10,12 +10,13 @@ if (!ctx) {
 const canvasWidth = 1000;
 const canvasHeight = 500;
 let masterArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
-let widthLimiter = (canvasWidth - 100) / 20;
+let gapSet = 5;
+let widthLimiter = (canvasWidth - 100) / masterArray.length - 5;
 // widthLimiter = 5
-let widthGap = widthLimiter + 1;
+let widthGap = widthLimiter + gapSet;
 // widthLimiter -= 1
 console.log(widthLimiter);
-console.log(widthGap);
+console.log(gapSet);
 // ctx.fillStyle = "skyblue";
 // ctx.fillRect(10, 10, 150, 150);
 function drawBoxes(x, y, w, h) {
@@ -24,6 +25,9 @@ function drawBoxes(x, y, w, h) {
         ctx.fillRect(x + i * widthGap, y, w, masterArray[i] * -20);
         if (i == 19) {
             console.log(x + i * widthGap + w);
+        }
+        if (i == 0) {
+            console.log(x + i * widthGap);
         }
     }
 }
