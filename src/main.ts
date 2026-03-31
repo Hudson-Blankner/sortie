@@ -13,26 +13,27 @@ if (!ctx) {
 const canvasWidth = 1000;
 const canvasHeight = 500;
 
-let masterArray = [1, 2, 3, 4, 5, 6, 7 ,8 , 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+let setUpArray: Array<number> = [];
+const arrayLength = 10;
+for (let i = 0; i < arrayLength; i++) {
+    setUpArray.push(i + 1);
+}
 let gapSet = 5
-let widthLimiter = (canvasWidth - 100) / masterArray.length - gapSet
-// widthLimiter = 5
-let widthGap = widthLimiter + gapSet
-// widthLimiter -= 1
+let boxWidth = ((canvasWidth - 100) - (gapSet * (setUpArray.length - 1))) / setUpArray.length //outputs 45 width for each box
+let widthGap = boxWidth + gapSet
+let boxHeight = canvasHeight - 100
+let boxHeightMultiplier = - (boxHeight / setUpArray[setUpArray.length-1]!)
 
-    console.log(widthLimiter)
-    console.log(gapSet)
+console.log(boxWidth)
+console.log(widthGap)
 
-
-// ctx.fillStyle = "skyblue";
-// ctx.fillRect(10, 10, 150, 150);
 
 function drawBoxes(x: number, y: number, w: number, h: number) {
     ctx!.fillStyle = "#1312128d";
-    for (let i = 0; i < masterArray.length; i++){
-        ctx!.fillRect(x + i*widthGap, y, w, masterArray[i]! * -20);
+    for (let i = 0; i < setUpArray.length; i++){
+        ctx!.fillRect(x + i*widthGap, y, w, setUpArray[i]! * boxHeightMultiplier);
 
-        if (i == 19) {
+        if (i == setUpArray.length - 1) {
             console.log(x + i*widthGap + w)
         }
         if (i == 0) {
@@ -41,4 +42,4 @@ function drawBoxes(x: number, y: number, w: number, h: number) {
     }
 }
 
-drawBoxes(50, 450, widthLimiter, -50)
+drawBoxes(50, 450, boxWidth, boxHeight)
