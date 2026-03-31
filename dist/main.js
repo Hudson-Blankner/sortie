@@ -12,7 +12,8 @@ const canvasHeight = 500;
 let masterArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 let widthLimiter = (canvasWidth - 100) / 20;
 // widthLimiter = 5
-let widthGap = widthLimiter / 20;
+let widthGap = widthLimiter + 1;
+// widthLimiter -= 1
 console.log(widthLimiter);
 console.log(widthGap);
 // ctx.fillStyle = "skyblue";
@@ -21,6 +22,9 @@ function drawBoxes(x, y, w, h) {
     ctx.fillStyle = "#1312128d";
     for (let i = 0; i < masterArray.length; i++) {
         ctx.fillRect(x + i * widthGap, y, w, masterArray[i] * -20);
+        if (i == 19) {
+            console.log(x + i * widthGap + w);
+        }
     }
 }
 drawBoxes(50, 450, widthLimiter, -50);
