@@ -2,7 +2,7 @@
 
     body {
       margin: 0;
-      background: #ffffff;
+      background: #F1EBE4;
       color: white;
       font-family: Arial, sans-serif;
     }    
@@ -11,5 +11,6 @@
       display: block;
       margin: 20px auto;
       border: 1px solid #444;
-      background: rgb(230, 177, 91);
+      background: #EEE3D6;
+      /* background: rgb(230, 177, 91); */
     }
