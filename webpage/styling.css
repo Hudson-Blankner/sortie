@@ -1,0 +1,15 @@
+
+
+    body {
+      margin: 0;
+      background: #ffffff;
+      color: white;
+      font-family: Arial, sans-serif;
+    }    
+    
+    canvas {
+      display: block;
+      margin: 20px auto;
+      border: 1px solid #444;
+      background: rgb(230, 177, 91);
+    }
