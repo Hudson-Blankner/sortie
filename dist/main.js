@@ -8,6 +8,6 @@ if (!ctx) {
     throw new Error("Could not get 2D context");
 }
 ctx.fillStyle = "skyblue";
-ctx.fillRect(10, 10, 40, 400);
+ctx.fillRect(100, 200, 150, 150);
 export {};
 //# sourceMappingURL=main.js.map
