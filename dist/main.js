@@ -12,7 +12,7 @@ const canvasWidth = 1000;
 const canvasHeight = 500;
 // array determining the amount of values/boxes the algorithm will need to sort through
 let setUpArray = [];
-const arrayLength = 100;
+const arrayLength = 10;
 for (let i = 0; i < arrayLength; i++) {
     setUpArray.push(i + 1);
 }
@@ -62,19 +62,47 @@ function updateBoxPositions(boxes) {
 }
 function setUpRandomize(boxes) {
     for (let i = 0; i < (setUpArray.length * 2); i++) {
-        let a = Math.floor(Math.random() * randomizedArray.length);
-        let b = Math.floor(Math.random() * randomizedArray.length);
+        let a = Math.floor(Math.random() * boxes.length);
+        let b = Math.floor(Math.random() * boxes.length);
         while (a == b) {
-            b = Math.floor(Math.random() * randomizedArray.length);
+            b = Math.floor(Math.random() * boxes.length);
         }
-        [randomizedArray[a], randomizedArray[b]] = [randomizedArray[b], randomizedArray[a]];
+        [boxes[a], boxes[b]] = [boxes[b], boxes[a]];
     }
 }
-setUpRandomize(randomizedArray);
+function checkSort(boxes) {
+    for (let i = 0; i < boxes.length - 1; i++) {
+        let box1 = boxes[i].value;
+        let box2 = boxes[i + 1].value;
+        if (box2 < box1) {
+            console.log("false");
+            return false;
+        }
+    }
+    console.log("true");
+    return true;
+}
+// setUpRandomize(randomizedArray)
 updateBoxPositions(randomizedArray);
 for (const box of randomizedArray) {
     box.draw(ctx);
     console.log(randomizedArray[randomizedArray.length - 1].value);
 }
+const randomizeButton = document.getElementById("randomizeButton");
+const bah = document.getElementById("bah");
+bah === null || bah === void 0 ? void 0 : bah.addEventListener("click", () => {
+    checkSort(randomizedArray);
+});
+if (!(randomizeButton instanceof HTMLButtonElement)) {
+    throw new Error("Button not found");
+}
+randomizeButton.addEventListener("click", () => {
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    setUpRandomize(randomizedArray);
+    updateBoxPositions(randomizedArray);
+    for (const box of randomizedArray) {
+        box.draw(ctx);
+    }
+});
 export {};
 //# sourceMappingURL=main.js.map
