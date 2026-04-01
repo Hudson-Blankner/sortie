@@ -17,7 +17,7 @@ const canvasHeight = 500;
 
 // array determining the amount of values/boxes the algorithm will need to sort through
 let setUpArray: Array<number> = [];
-const arrayLength = 10;
+const arrayLength = 100;
 for (let i = 0; i < arrayLength; i++) {
     setUpArray.push(i + 1);
 }
@@ -94,4 +94,3 @@ for (const box of randomizedArray) {
     box.draw(ctx)
     console.log(randomizedArray[randomizedArray.length-1]!.value)
 }
-

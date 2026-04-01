@@ -12,7 +12,7 @@ const canvasWidth = 1000;
 const canvasHeight = 500;
 // array determining the amount of values/boxes the algorithm will need to sort through
 let setUpArray = [];
-const arrayLength = 10;
+const arrayLength = 100;
 for (let i = 0; i < arrayLength; i++) {
     setUpArray.push(i + 1);
 }
