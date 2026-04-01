@@ -39,12 +39,14 @@ class Box {
     y: number;
     width: number;
     height: number;
+    value: number;
 
-    constructor(x: number, y: number, width: number, height: number) {
+    constructor(x: number, y: number, width: number, height: number, value: number) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.value = value;
     }
 
     draw(ctx: CanvasRenderingContext2D) {
@@ -57,18 +59,39 @@ function drawBoxes(x: number, y: number, w: number, h: number) {
     ctx!.fillStyle = "#1312128d";
     for (let i = 0; i < setUpArray.length; i++){
         // ctx!.fillRect(x + i*widthGap, y, w, setUpArray[i]! * boxHeightMultiplier);
-        masterArray.push(new Box(x + i*widthGap, y, w, setUpArray[i]! * boxHeightMultiplier))
+        masterArray.push(new Box(x + i*widthGap, y, w, setUpArray[i]! * boxHeightMultiplier, setUpArray[i]!))
 
         if (i == setUpArray.length - 1) {
-            console.log("Edge of first box is: " + (x + i * widthGap + w));
+            console.log("Edge of first box is: " + (x + i * widthGap + w + " And the value is: " + setUpArray[i]));
         }
         if (i == 0) {
-            console.log("Edge of last box is: " + (x + i * widthGap));
+            console.log("Edge of last box is: " + (x + i * widthGap) + " And the value is: " + setUpArray[i]);
         }
+    }
+} drawBoxes(50, 450, boxWidth, boxHeight);
+const randomizedArray = [...masterArray];
+
+
+function updateBoxPositions(boxes: Box[]){
+    for (let i = 0; i < boxes.length; i++) {
+        boxes[i]!.x = 50 + (i*widthGap);
     }
 }
 
-drawBoxes(50, 450, boxWidth, boxHeight)
-for (const box of masterArray) {
-    box.draw(ctx)
+function setUpRandomize (boxes: Box[]){
+    for (let i = 0; i < (setUpArray.length * 2); i++){
+        let a = Math.floor(Math.random() * randomizedArray.length)
+        let b = Math.floor(Math.random() * randomizedArray.length)
+        while (a == b){
+            b = Math.floor(Math.random() * randomizedArray.length)
+        }
+        [randomizedArray[a]!, randomizedArray[b]!] = [randomizedArray[b]!, randomizedArray[a]!]
+    }
 }
+setUpRandomize(randomizedArray)
+updateBoxPositions(randomizedArray)
+for (const box of randomizedArray) {
+    box.draw(ctx)
+    console.log(randomizedArray[randomizedArray.length-1]!.value)
+}
+
