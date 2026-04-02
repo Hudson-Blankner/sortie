@@ -15,7 +15,31 @@ function sleep(ms) {
 }
 export function normalSort(boxes) {
     return __awaiter(this, void 0, void 0, function* () {
-        let current;
+        if (checkSort(normalArray)) {
+            return;
+        }
+        for (let a = 0; a < normalArray.length; a++) {
+            for (let b = a + 1; b < normalArray.length; b++)
+                if (boxes[a].value > boxes[b].value) {
+                    let temp = boxes[a];
+                    boxes[a] = boxes[b];
+                    boxes[b] = temp;
+                    updateBoxPositions(boxes);
+                    clear();
+                }
+            yield sleep(normalSpeed);
+            if (!checkSort(boxes)) {
+                normalSort(boxes);
+            }
+        }
+        // Sorting function:
+        // Repeat until the array is fully sorted:
+        // 1. Go through the array 
+        // 2. Compare values next to each other
+        // 3. If they are in the wrong order, swap them
+        // 4. Redraw the bars after the swap
+        // 5. Wait a short amount of time so the animation can be seen
+        // End once everything is in the correct order
     });
 }
 //# sourceMappingURL=normalSort.js.map
