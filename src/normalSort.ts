@@ -1,4 +1,4 @@
-import { Box, randomizedArray, updateBoxPositions, ctx, canvasWidth, canvasHeight, clear, checkSort } from "./main.js";
+import { Box, randomizedArray, updateBoxPositions, ctx, canvasWidth, canvasHeight, clear, checkSort, updateValidPositions } from "./main.js";
 export let normalArray = [...randomizedArray];
 let normalSpeed = 20;
 function sleep(ms: number): Promise<void> {
@@ -23,6 +23,7 @@ function sleep(ms: number): Promise<void> {
 //              await sleep(normalSpeed)
 //     }
 // }
+
 export async function normalSort (boxes: Box[]) {
     if (checkSort(boxes)) {
         return
@@ -34,19 +35,22 @@ export async function normalSort (boxes: Box[]) {
                 boxes[a]! = boxes[b]!
                 boxes[b]! = temp
                 updateBoxPositions(boxes)
+                updateValidPositions(boxes)
                 clear()
                 for (const box of boxes){
                 box.draw(ctx!)
                 }
                 await sleep(normalSpeed)
             }
-            if (boxes[a]!.value < boxes[b]!.value){
-                for (const box of boxes) {
-                    boxes[a]!.validPosition = true;
-                    boxes[b]!.validPosition = true;
-                    box.draw(ctx!)
-                } 
-            }
+            // if (boxes[a]!.value < boxes[b]!.value){
+            //     for (const box of boxes) {
+            //         boxes[a]!.validPosition = true;
+            //         boxes[b]!.validPosition = true;
+            //         updateBoxPositions(boxes)
+            //         // clear()
+            //         box.draw(ctx!)
+            //     } 
+            // }
              await sleep(normalSpeed)
         }
         

@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Box, randomizedArray, updateBoxPositions, ctx, canvasWidth, canvasHeight, clear, checkSort } from "./main.js";
+import { Box, randomizedArray, updateBoxPositions, ctx, canvasWidth, canvasHeight, clear, checkSort, updateValidPositions } from "./main.js";
 export let normalArray = [...randomizedArray];
 let normalSpeed = 20;
 function sleep(ms) {
@@ -44,19 +44,22 @@ export function normalSort(boxes) {
                     boxes[a] = boxes[b];
                     boxes[b] = temp;
                     updateBoxPositions(boxes);
+                    updateValidPositions(boxes);
                     clear();
                     for (const box of boxes) {
                         box.draw(ctx);
                     }
                     yield sleep(normalSpeed);
                 }
-                if (boxes[a].value < boxes[b].value) {
-                    for (const box of boxes) {
-                        boxes[a].validPosition = true;
-                        boxes[b].validPosition = true;
-                        box.draw(ctx);
-                    }
-                }
+                // if (boxes[a]!.value < boxes[b]!.value){
+                //     for (const box of boxes) {
+                //         boxes[a]!.validPosition = true;
+                //         boxes[b]!.validPosition = true;
+                //         updateBoxPositions(boxes)
+                //         // clear()
+                //         box.draw(ctx!)
+                //     } 
+                // }
                 yield sleep(normalSpeed);
             }
         }

@@ -120,6 +120,11 @@ export function clear () {
 export function colorChange (boxes: Box[]) {
 
 }
+export function updateValidPositions(boxes: Box[]) {
+    for (let i = 0; i < boxes.length; i++) {
+        boxes[i]!.validPosition = boxes[i]!.value === i + 1;
+    }
+}
 setUpRandomize(randomizedArray)
 updateBoxPositions(randomizedArray)
 for (const box of randomizedArray) {
