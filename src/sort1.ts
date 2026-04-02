@@ -2,7 +2,7 @@ import { Box, randomizedArray, updateBoxPositions, ctx, canvasWidth, canvasHeigh
 import { bogoArray } from "./sort2.js";
 export let thanosArray = [...randomizedArray];
 let thanosSpeed = 1000;
-let thanosStepSpeed = 400
+let thanosStepSpeed = 45
 function sleep(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));
 }

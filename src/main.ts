@@ -16,7 +16,7 @@ export const canvasHeight = 500;
 
 // array determining the amount of values/boxes the algorithm will need to sort through
 let setUpArray: Array<number> = [];
-const arrayLength = 6;
+const arrayLength = 50;
 for (let i = 0; i < arrayLength; i++) {
     setUpArray.push(i + 1);
 }
