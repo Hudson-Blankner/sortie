@@ -1,6 +1,10 @@
 import { Box, randomizedArray, updateBoxPositions, ctx, canvasWidth, canvasHeight, clear, checkSort } from "./main.js";
-export const thanosArray = [...randomizedArray];
-function thanos (boxes: Box[]) {
+export let thanosArray = [...randomizedArray];
+let thanosSpeed = 1000;
+function sleep(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+export async function thanos (boxes: Box[]) {
     let amountToDelete = Math.floor(boxes.length / 2);
     if (checkSort(boxes) == true){
         return
@@ -9,13 +13,23 @@ function thanos (boxes: Box[]) {
     for (let i = 0; i < amountToDelete; i++){
         let a = Math.floor(Math.random() * boxes.length)
         boxes.splice(a, 1)
+        updateBoxPositions(boxes)
+        clear()
+        for (const box of boxes) {
+            box.draw(ctx!)
+        }  
+        await sleep(25)
     }
-    
-    updateBoxPositions(boxes)
-    clear()
-    for (const box of boxes) {
-    box.draw(ctx!)
-    }
+    // if (thanosSpeed > 300){
+    //     thanosSpeed -= 300
+    // }
+
+    // updateBoxPositions(boxes)
+    // clear()
+    // for (const box of boxes) {
+    //     box.draw(ctx!)
+    // }
+    await sleep(1000)
     if (checkSort(boxes) !== true) {
         thanos(boxes)
     }
@@ -23,5 +37,6 @@ function thanos (boxes: Box[]) {
 const thanosBtn = document.getElementById("thanosBtn")
 
 thanosBtn!.addEventListener("click", () => {
+    thanosArray = [...randomizedArray]
     thanos(thanosArray)
 });
