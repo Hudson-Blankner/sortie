@@ -1,6 +1,8 @@
 import { Box, randomizedArray, updateBoxPositions, ctx, canvasWidth, canvasHeight, clear, checkSort } from "./main.js";
+import { bogoArray } from "./sort2.js";
 export let thanosArray = [...randomizedArray];
 let thanosSpeed = 1000;
+let thanosStepSpeed = 400
 function sleep(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -25,17 +27,8 @@ export async function thanos (boxes: Box[]) {
             box.draw(ctx!)
             
         }  
-        await sleep(45)
+        await sleep(thanosStepSpeed)
     }
-    // if (thanosSpeed > 300){
-    //     thanosSpeed -= 300
-    // }
-
-    // updateBoxPositions(boxes)
-    // clear()
-    // for (const box of boxes) {
-    //     box.draw(ctx!)
-    // }
     await sleep(thanosSpeed)
     if (checkSort(boxes) !== true) {
         thanos(boxes)

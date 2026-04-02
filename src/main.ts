@@ -16,7 +16,7 @@ export const canvasHeight = 500;
 
 // array determining the amount of values/boxes the algorithm will need to sort through
 let setUpArray: Array<number> = [];
-const arrayLength = 20;
+const arrayLength = 6;
 for (let i = 0; i < arrayLength; i++) {
     setUpArray.push(i + 1);
 }
@@ -104,12 +104,14 @@ export function checkSort (boxes: Box[]) : boolean{
     console.log("true")
     return true
 }
-
 export function clear () {
     ctx!.clearRect(0, 0, canvasWidth, canvasHeight)
     ctx!.fillStyle = "#1312128d"
     // setUpRandomize(randomizedArray);
     // updateBoxPositions(randomizedArray)
+}
+export function colorChange (boxes: Box[]) {
+
 }
 setUpRandomize(randomizedArray)
 updateBoxPositions(randomizedArray)

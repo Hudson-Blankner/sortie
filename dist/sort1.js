@@ -8,8 +8,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { Box, randomizedArray, updateBoxPositions, ctx, canvasWidth, canvasHeight, clear, checkSort } from "./main.js";
+import { bogoArray } from "./sort2.js";
 export let thanosArray = [...randomizedArray];
 let thanosSpeed = 1000;
+let thanosStepSpeed = 400;
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -34,16 +36,8 @@ export function thanos(boxes) {
                 }
                 box.draw(ctx);
             }
-            yield sleep(45);
+            yield sleep(thanosStepSpeed);
         }
-        // if (thanosSpeed > 300){
-        //     thanosSpeed -= 300
-        // }
-        // updateBoxPositions(boxes)
-        // clear()
-        // for (const box of boxes) {
-        //     box.draw(ctx!)
-        // }
         yield sleep(thanosSpeed);
         if (checkSort(boxes) !== true) {
             thanos(boxes);

@@ -12,7 +12,7 @@ export const canvasWidth = 1000;
 export const canvasHeight = 500;
 // array determining the amount of values/boxes the algorithm will need to sort through
 let setUpArray = [];
-const arrayLength = 20;
+const arrayLength = 6;
 for (let i = 0; i < arrayLength; i++) {
     setUpArray.push(i + 1);
 }
@@ -95,6 +95,8 @@ export function clear() {
     ctx.fillStyle = "#1312128d";
     // setUpRandomize(randomizedArray);
     // updateBoxPositions(randomizedArray)
+}
+export function colorChange(boxes) {
 }
 setUpRandomize(randomizedArray);
 updateBoxPositions(randomizedArray);
