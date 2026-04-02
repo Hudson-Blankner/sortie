@@ -8,14 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { Box, randomizedArray, updateBoxPositions, ctx, canvasWidth, canvasHeight, clear, checkSort } from "./main.js";
-import { bogoArray } from "./sort2.js";
 export let thanosArray = [...randomizedArray];
 let thanosSpeed = 1000;
 let thanosStepSpeed = 45;
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-export function thanos(boxes) {
+export function thanosSort(boxes) {
     return __awaiter(this, void 0, void 0, function* () {
         clear();
         let amountToDelete = Math.floor(boxes.length / 2);
@@ -39,14 +38,14 @@ export function thanos(boxes) {
             yield sleep(thanosStepSpeed);
         }
         yield sleep(thanosSpeed);
-        if (checkSort(boxes) !== true) {
-            thanos(boxes);
+        if (!checkSort(boxes)) {
+            thanosSort(boxes);
         }
     });
 }
 const thanosBtn = document.getElementById("thanosBtn");
 thanosBtn.addEventListener("click", () => {
     thanosArray = [...randomizedArray];
-    thanos(thanosArray);
+    thanosSort(thanosArray);
 });
 //# sourceMappingURL=sort1.js.map

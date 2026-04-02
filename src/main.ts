@@ -39,6 +39,7 @@ export class Box {
     width: number;
     height: number;
     value: number;
+    
 
     constructor(x: number, y: number, width: number, height: number, value: number) {
         this.x = x;
