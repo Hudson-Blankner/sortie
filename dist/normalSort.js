@@ -42,4 +42,9 @@ export function normalSort(boxes) {
         // End once everything is in the correct order
     });
 }
+const normalBtn = document.getElementById("normalBtn");
+normalBtn.addEventListener("click", () => {
+    normalArray = [...randomizedArray];
+    normalSort(normalArray);
+});
 //# sourceMappingURL=normalSort.js.map
