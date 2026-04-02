@@ -16,7 +16,7 @@ export const canvasHeight = 500;
 
 // array determining the amount of values/boxes the algorithm will need to sort through
 let setUpArray: Array<number> = [];
-const arrayLength = 10;
+const arrayLength = 100;
 for (let i = 0; i < arrayLength; i++) {
     setUpArray.push(i + 1);
 }
@@ -69,14 +69,11 @@ function drawBoxes(x: number, y: number, w: number, h: number) {
     }
 } drawBoxes(50, 450, boxWidth, boxHeight);
 export const randomizedArray = [...masterArray];
-
-
 export function updateBoxPositions(boxes: Box[]){
     for (let i = 0; i < boxes.length; i++) {
         boxes[i]!.x = 50 + (i*widthGap);
     }
 }
-
 export function setUpRandomize (boxes: Box[]){
     for (let i = 0; i < (setUpArray.length * 2); i++){
         let a = Math.floor(Math.random() * boxes.length)
@@ -87,7 +84,6 @@ export function setUpRandomize (boxes: Box[]){
         [boxes[a]!, boxes[b]!] = [boxes[b]!, boxes[a]!]
     }
 }
-
 export function checkSort (boxes: Box[]) : boolean{
     for (let i = 0; i <boxes.length-1; i++){
         let box1 = boxes[i]!.value
