@@ -10,10 +10,9 @@ const ctx = canvas.getContext("2d");
 if (!ctx) {
   throw new Error("Could not get 2D context");
 }
-
 // Set canvas dimensions
-const canvasWidth = 1000;
-const canvasHeight = 500;
+export const canvasWidth = 1000;
+export const canvasHeight = 500;
 
 // array determining the amount of values/boxes the algorithm will need to sort through
 let setUpArray: Array<number> = [];
@@ -33,8 +32,8 @@ console.log("Each box width is: " + boxWidth)
 console.log("Each box gap is: " +widthGap)
 
 // class and array for boxes
-let masterArray: Box[] = []
-class Box {
+export let masterArray: Box[] = []
+export class Box {
     x: number;
     y: number;
     width: number;
@@ -69,16 +68,16 @@ function drawBoxes(x: number, y: number, w: number, h: number) {
         }
     }
 } drawBoxes(50, 450, boxWidth, boxHeight);
-const randomizedArray = [...masterArray];
+export const randomizedArray = [...masterArray];
 
 
-function updateBoxPositions(boxes: Box[]){
+export function updateBoxPositions(boxes: Box[]){
     for (let i = 0; i < boxes.length; i++) {
         boxes[i]!.x = 50 + (i*widthGap);
     }
 }
 
-function setUpRandomize (boxes: Box[]){
+export function setUpRandomize (boxes: Box[]){
     for (let i = 0; i < (setUpArray.length * 2); i++){
         let a = Math.floor(Math.random() * boxes.length)
         let b = Math.floor(Math.random() * boxes.length)
@@ -89,7 +88,7 @@ function setUpRandomize (boxes: Box[]){
     }
 }
 
-function checkSort (boxes: Box[]) : boolean{
+export function checkSort (boxes: Box[]) : boolean{
     for (let i = 0; i <boxes.length-1; i++){
         let box1 = boxes[i]!.value
         let box2 = boxes[i + 1]!.value
@@ -102,12 +101,18 @@ function checkSort (boxes: Box[]) : boolean{
     return true
 }
 
-// setUpRandomize(randomizedArray)
+export function clear () {
+    ctx!.clearRect(0, 0, canvasWidth, canvasHeight)
+    setUpRandomize(randomizedArray);
+    updateBoxPositions(randomizedArray)
+}
+setUpRandomize(randomizedArray)
 updateBoxPositions(randomizedArray)
 for (const box of randomizedArray) {
     box.draw(ctx)
     console.log(randomizedArray[randomizedArray.length-1]!.value)
 }
+
 
 const randomizeButton = document.getElementById("randomizeButton");
 const bah = document.getElementById("bah")

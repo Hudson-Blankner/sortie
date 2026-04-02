@@ -8,8 +8,8 @@ if (!ctx) {
     throw new Error("Could not get 2D context");
 }
 // Set canvas dimensions
-const canvasWidth = 1000;
-const canvasHeight = 500;
+export const canvasWidth = 1000;
+export const canvasHeight = 500;
 // array determining the amount of values/boxes the algorithm will need to sort through
 let setUpArray = [];
 const arrayLength = 10;
@@ -26,8 +26,8 @@ let boxHeightMultiplier = -(boxHeight / setUpArray[setUpArray.length - 1]);
 console.log("Each box width is: " + boxWidth);
 console.log("Each box gap is: " + widthGap);
 // class and array for boxes
-let masterArray = [];
-class Box {
+export let masterArray = [];
+export class Box {
     constructor(x, y, width, height, value) {
         this.x = x;
         this.y = y;
@@ -54,13 +54,13 @@ function drawBoxes(x, y, w, h) {
     }
 }
 drawBoxes(50, 450, boxWidth, boxHeight);
-const randomizedArray = [...masterArray];
-function updateBoxPositions(boxes) {
+export const randomizedArray = [...masterArray];
+export function updateBoxPositions(boxes) {
     for (let i = 0; i < boxes.length; i++) {
         boxes[i].x = 50 + (i * widthGap);
     }
 }
-function setUpRandomize(boxes) {
+export function setUpRandomize(boxes) {
     for (let i = 0; i < (setUpArray.length * 2); i++) {
         let a = Math.floor(Math.random() * boxes.length);
         let b = Math.floor(Math.random() * boxes.length);
@@ -70,7 +70,7 @@ function setUpRandomize(boxes) {
         [boxes[a], boxes[b]] = [boxes[b], boxes[a]];
     }
 }
-function checkSort(boxes) {
+export function checkSort(boxes) {
     for (let i = 0; i < boxes.length - 1; i++) {
         let box1 = boxes[i].value;
         let box2 = boxes[i + 1].value;
@@ -82,7 +82,12 @@ function checkSort(boxes) {
     console.log("true");
     return true;
 }
-// setUpRandomize(randomizedArray)
+export function clear() {
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    setUpRandomize(randomizedArray);
+    updateBoxPositions(randomizedArray);
+}
+setUpRandomize(randomizedArray);
 updateBoxPositions(randomizedArray);
 for (const box of randomizedArray) {
     box.draw(ctx);
@@ -104,5 +109,4 @@ randomizeButton.addEventListener("click", () => {
         box.draw(ctx);
     }
 });
-export {};
 //# sourceMappingURL=main.js.map
