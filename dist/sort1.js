@@ -15,6 +15,7 @@ function sleep(ms) {
 }
 export function thanos(boxes) {
     return __awaiter(this, void 0, void 0, function* () {
+        clear();
         let amountToDelete = Math.floor(boxes.length / 2);
         if (checkSort(boxes) == true) {
             return;
@@ -25,9 +26,15 @@ export function thanos(boxes) {
             updateBoxPositions(boxes);
             clear();
             for (const box of boxes) {
+                if (checkSort(boxes)) {
+                    ctx.fillStyle = "green";
+                }
+                else {
+                    ctx.fillStyle = "#1312128d";
+                }
                 box.draw(ctx);
             }
-            yield sleep(25);
+            yield sleep(45);
         }
         // if (thanosSpeed > 300){
         //     thanosSpeed -= 300
@@ -37,7 +44,7 @@ export function thanos(boxes) {
         // for (const box of boxes) {
         //     box.draw(ctx!)
         // }
-        yield sleep(1000);
+        yield sleep(thanosSpeed);
         if (checkSort(boxes) !== true) {
             thanos(boxes);
         }

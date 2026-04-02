@@ -5,6 +5,7 @@ function sleep(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 export async function thanos (boxes: Box[]) {
+    clear()
     let amountToDelete = Math.floor(boxes.length / 2);
     if (checkSort(boxes) == true){
         return
@@ -16,9 +17,15 @@ export async function thanos (boxes: Box[]) {
         updateBoxPositions(boxes)
         clear()
         for (const box of boxes) {
+            if (checkSort(boxes)){
+                ctx!.fillStyle = "green"
+            } else {
+                ctx!.fillStyle = "#1312128d"
+            }
             box.draw(ctx!)
+            
         }  
-        await sleep(25)
+        await sleep(45)
     }
     // if (thanosSpeed > 300){
     //     thanosSpeed -= 300
@@ -29,7 +36,7 @@ export async function thanos (boxes: Box[]) {
     // for (const box of boxes) {
     //     box.draw(ctx!)
     // }
-    await sleep(1000)
+    await sleep(thanosSpeed)
     if (checkSort(boxes) !== true) {
         thanos(boxes)
     }

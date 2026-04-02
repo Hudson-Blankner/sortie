@@ -17,7 +17,7 @@ for (let i = 0; i < arrayLength; i++) {
     setUpArray.push(i + 1);
 }
 // code for determining the dimenisons of each box and the gap between them depending on the amount of space
-let gapSet = 5;
+let gapSet = 3;
 let boxWidth = ((canvasWidth - 100) - (gapSet * (setUpArray.length - 1))) / setUpArray.length; //outputs 45 width for each box
 let widthGap = boxWidth + gapSet;
 let boxHeight = canvasHeight - 100;
@@ -92,6 +92,7 @@ export function checkSort(boxes) {
 }
 export function clear() {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    ctx.fillStyle = "#1312128d";
     // setUpRandomize(randomizedArray);
     // updateBoxPositions(randomizedArray)
 }
@@ -110,6 +111,7 @@ if (!(randomizeButton instanceof HTMLButtonElement)) {
     throw new Error("Button not found");
 }
 randomizeButton.addEventListener("click", () => {
+    clear();
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     setUpRandomize(randomizedArray);
     updateBoxPositions(randomizedArray);
