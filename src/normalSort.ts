@@ -1,28 +1,57 @@
 import { Box, randomizedArray, updateBoxPositions, ctx, canvasWidth, canvasHeight, clear, checkSort } from "./main.js";
 export let normalArray = [...randomizedArray];
-let normalSpeed = 100;
+let normalSpeed = 20;
 function sleep(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+// export async function normalSort (boxes: Box[]) {
+//     if (checkSort(boxes)) {
+//         return
+//     }
+//     for (let a = 0; a < boxes.length; a ++) {
+//         for (let b = a+1; b < boxes.length; b++)
+//             if (boxes[a]!.value > boxes[b]!.value){
+//                 let temp = boxes[a]!;
+//                 boxes[a]! = boxes[b]!
+//                 boxes[b]! = temp
+//                 updateBoxPositions(boxes)
+//                 clear()
+//                 for (const box of boxes){
+//                 box.draw(ctx!)
+//                 }
+//             }
+//              await sleep(normalSpeed)
+//     }
+// }
 export async function normalSort (boxes: Box[]) {
-    if (checkSort(normalArray)) {
+    if (checkSort(boxes)) {
         return
     }
-    for (let a = 0; a < normalArray.length; a ++) {
-        for (let b = a+1; b < normalArray.length; b++)
+    for (let a = 0; a < boxes.length; a ++) {
+        for (let b = a+1; b < boxes.length; b++){
             if (boxes[a]!.value > boxes[b]!.value){
                 let temp = boxes[a]!;
                 boxes[a]! = boxes[b]!
                 boxes[b]! = temp
                 updateBoxPositions(boxes)
                 clear()
+                for (const box of boxes){
+                box.draw(ctx!)
+                }
+                await sleep(normalSpeed)
             }
-            await sleep(normalSpeed)
-            if (!checkSort(boxes)){
-                normalSort(boxes)
+            if (boxes[a]!.value < boxes[b]!.value){
+                for (const box of boxes) {
+                    boxes[a]!.validPosition = true;
+                    boxes[b]!.validPosition = true;
+                    box.draw(ctx!)
+                } 
             }
+             await sleep(normalSpeed)
+        }
+        
     }
-
+}
 
 // Sorting function:
 // Repeat until the array is fully sorted:
@@ -34,7 +63,6 @@ export async function normalSort (boxes: Box[]) {
 
 // End once everything is in the correct order
 
-}
 
 const normalBtn = document.getElementById("normalBtn")
 

@@ -16,7 +16,7 @@ export const canvasHeight = 500;
 
 // array determining the amount of values/boxes the algorithm will need to sort through
 let setUpArray: Array<number> = [];
-const arrayLength = 50;
+const arrayLength = 20;
 for (let i = 0; i < arrayLength; i++) {
     setUpArray.push(i + 1);
 }
@@ -39,7 +39,7 @@ export class Box {
     width: number;
     height: number;
     value: number;
-    
+    validPosition: boolean
 
     constructor(x: number, y: number, width: number, height: number, value: number) {
         this.x = x;
@@ -47,9 +47,15 @@ export class Box {
         this.width = width;
         this.height = height;
         this.value = value;
+        this.validPosition = false;
     }
 
     draw(ctx: CanvasRenderingContext2D) {
+        if (this.validPosition){
+            ctx!.fillStyle = "green"
+        } else {
+            ctx!.fillStyle = "#1312128d";
+        }
         ctx.fillRect(this.x, this.y, this.width, this.height)
     }
 }
