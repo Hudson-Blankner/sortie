@@ -8,7 +8,6 @@ function thanos (boxes: Box[]) {
         boxes.splice(a, 1)
     }
     updateBoxPositions(boxes)
-    checkSort(boxes)
 }
 const thanosBtn = document.getElementById("thanosBtn")
 
