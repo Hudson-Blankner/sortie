@@ -20,8 +20,8 @@ export function candleSort(boxes) {
                 for (let i = 0; i < randomizedArray.length; i++) {
                     const subtractAmount = candleArray[i - 1].value - candleArray[i].value;
                     candleArray[i].value = candleArray[i].value - subtractAmount;
-                    updateBoxPositions(boxes);
-                    drawBoxesNow(boxes);
+                    // updateBoxPositions(boxes)
+                    // drawBoxesNow(boxes)
                 }
             }
             // updateBoxPositions(boxes)
