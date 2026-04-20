@@ -90,6 +90,7 @@ export function updateBoxPositions(boxes: Box[]){
     }
 }
 export function setUpRandomize (boxes: Box[]){
+    clear()
     for (let i = 0; i < (setUpArray.length * 2); i++){
         let a = Math.floor(Math.random() * boxes.length)
         let b = Math.floor(Math.random() * boxes.length)

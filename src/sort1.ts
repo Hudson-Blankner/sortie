@@ -1,4 +1,4 @@
-import { Box, randomizedArray, updateBoxPositions, ctx, canvasWidth, canvasHeight, clear, checkSort } from "./main.js";
+import { Box, randomizedArray, updateBoxPositions, ctx, canvasWidth, canvasHeight, clear, checkSort, setUpRandomize } from "./main.js";
 export let thanosArray = [...randomizedArray];
 let thanosSpeed = 1000;
 let thanosStepSpeed = 45
@@ -36,6 +36,7 @@ export async function thanosSort (boxes: Box[]) {
 const thanosBtn = document.getElementById("thanosBtn")
 
 thanosBtn!.addEventListener("click", () => {
+    setUpRandomize(randomizedArray)
     thanosArray = [...randomizedArray]
     thanosSort(thanosArray)
 });
