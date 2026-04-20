@@ -13,25 +13,6 @@ let normalSpeed = 20;
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-// export async function normalSort (boxes: Box[]) {
-//     if (checkSort(boxes)) {
-//         return
-//     }
-//     for (let a = 0; a < boxes.length; a ++) {
-//         for (let b = a+1; b < boxes.length; b++)
-//             if (boxes[a]!.value > boxes[b]!.value){
-//                 let temp = boxes[a]!;
-//                 boxes[a]! = boxes[b]!
-//                 boxes[b]! = temp
-//                 updateBoxPositions(boxes)
-//                 clear()
-//                 for (const box of boxes){
-//                 box.draw(ctx!)
-//                 }
-//             }
-//              await sleep(normalSpeed)
-//     }
-// }
 export function normalSort(boxes) {
     return __awaiter(this, void 0, void 0, function* () {
         if (checkSort(boxes)) {
@@ -44,22 +25,13 @@ export function normalSort(boxes) {
                     boxes[a] = boxes[b];
                     boxes[b] = temp;
                     updateBoxPositions(boxes);
-                    updateValidPositions(boxes);
+                    // updateValidPositions(boxes)
                     clear();
                     for (const box of boxes) {
                         box.draw(ctx);
                     }
                     yield sleep(normalSpeed);
                 }
-                // if (boxes[a]!.value < boxes[b]!.value){
-                //     for (const box of boxes) {
-                //         boxes[a]!.validPosition = true;
-                //         boxes[b]!.validPosition = true;
-                //         updateBoxPositions(boxes)
-                //         // clear()
-                //         box.draw(ctx!)
-                //     } 
-                // }
                 yield sleep(normalSpeed);
             }
         }
