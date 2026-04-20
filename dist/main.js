@@ -76,6 +76,7 @@ export function updateBoxPositions(boxes) {
     }
 }
 export function setUpRandomize(boxes) {
+    clear();
     for (let i = 0; i < (setUpArray.length * 2); i++) {
         let a = Math.floor(Math.random() * boxes.length);
         let b = Math.floor(Math.random() * boxes.length);
