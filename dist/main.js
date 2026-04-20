@@ -1,3 +1,12 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 console.log("working");
 const canvas = document.getElementById("sortCanvas");
 if (!(canvas instanceof HTMLCanvasElement)) {
@@ -110,6 +119,46 @@ export function updateValidPositions(boxes) {
     for (let i = 0; i < boxes.length; i++) {
         boxes[i].validPosition = boxes[i].value === i + 1;
     }
+}
+let sortedCheckRun = 0;
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+export function drawBoxesNow(boxes) {
+    clear();
+    for (const box of boxes) {
+        box.draw(ctx);
+    }
+}
+export function cancelSortedCheck(boxes) {
+    sortedCheckRun++;
+    if (boxes) {
+        for (const box of boxes) {
+            box.validPosition = false;
+        }
+        drawBoxesNow(boxes);
+    }
+}
+export function playSortedCheck(boxes_1) {
+    return __awaiter(this, arguments, void 0, function* (boxes, delay = 120) {
+        const runId = ++sortedCheckRun;
+        for (const box of boxes) {
+            box.validPosition = false;
+        }
+        drawBoxesNow(boxes);
+        if (!checkSort(boxes)) {
+            return;
+        }
+        for (let i = 0; i < boxes.length; i++) {
+            if (runId !== sortedCheckRun) {
+                return;
+            }
+            boxes[i].validPosition = true;
+            drawBoxesNow(boxes);
+            yield sleep(delay);
+            delay -= i;
+        }
+    });
 }
 setUpRandomize(randomizedArray);
 updateBoxPositions(randomizedArray);

@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Box, randomizedArray, updateBoxPositions, ctx, canvasWidth, canvasHeight, clear, checkSort, setUpRandomize } from "./main.js";
+import { Box, randomizedArray, updateBoxPositions, ctx, canvasWidth, canvasHeight, clear, checkSort, setUpRandomize, playSortedCheck, cancelSortedCheck, drawBoxesNow } from "./main.js";
 export let thanosArray = [...randomizedArray];
 let thanosSpeed = 1000;
 let thanosStepSpeed = 45;
@@ -16,31 +16,25 @@ function sleep(ms) {
 }
 export function thanosSort(boxes) {
     return __awaiter(this, void 0, void 0, function* () {
-        clear();
+        cancelSortedCheck(boxes);
         let amountToDelete = Math.floor(boxes.length / 2);
-        if (checkSort(boxes) == true) {
+        if (checkSort(boxes)) {
+            yield playSortedCheck(boxes);
             return;
         }
         for (let i = 0; i < amountToDelete; i++) {
             let a = Math.floor(Math.random() * boxes.length);
             boxes.splice(a, 1);
             updateBoxPositions(boxes);
-            clear();
-            for (const box of boxes) {
-                if (checkSort(boxes)) {
-                    ctx.fillStyle = "green";
-                }
-                else {
-                    ctx.fillStyle = "#1312128d";
-                }
-                box.draw(ctx);
-            }
+            drawBoxesNow(boxes);
             yield sleep(thanosStepSpeed);
         }
         yield sleep(thanosSpeed);
         if (!checkSort(boxes)) {
             thanosSort(boxes);
+            return;
         }
+        yield playSortedCheck(boxes);
     });
 }
 const thanosBtn = document.getElementById("thanosBtn");

@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Box, randomizedArray, updateBoxPositions, ctx, canvasWidth, canvasHeight, clear, checkSort, setUpRandomize } from "./main.js";
+import { Box, randomizedArray, updateBoxPositions, ctx, canvasWidth, canvasHeight, clear, checkSort, setUpRandomize, drawBoxesNow, cancelSortedCheck, playSortedCheck } from "./main.js";
 export let bogoArray = [...randomizedArray];
 let bogoSpeed = 50;
 function sleep(ms) {
@@ -15,19 +15,18 @@ function sleep(ms) {
 }
 export function bogoSort(boxes) {
     return __awaiter(this, void 0, void 0, function* () {
+        cancelSortedCheck(boxes);
         if (checkSort(boxes)) {
             return;
         }
         setUpRandomize(boxes);
         updateBoxPositions(boxes);
-        clear();
-        for (const box of boxes) {
-            box.draw(ctx);
-        }
+        drawBoxesNow(boxes);
         yield sleep(bogoSpeed);
         if (!checkSort(boxes)) {
             bogoSort(boxes);
         }
+        yield playSortedCheck(boxes);
     });
 }
 const bogoBtn = document.getElementById("bogoBtn");

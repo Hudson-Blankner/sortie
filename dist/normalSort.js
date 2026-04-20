@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Box, randomizedArray, updateBoxPositions, ctx, canvasWidth, canvasHeight, clear, checkSort, updateValidPositions, setUpRandomize } from "./main.js";
+import { Box, randomizedArray, updateBoxPositions, ctx, canvasWidth, canvasHeight, clear, checkSort, updateValidPositions, setUpRandomize, drawBoxesNow, playSortedCheck, cancelSortedCheck } from "./main.js";
 export let normalArray = [...randomizedArray];
 let normalSpeed = 20;
 function sleep(ms) {
@@ -15,7 +15,9 @@ function sleep(ms) {
 }
 export function normalSort(boxes) {
     return __awaiter(this, void 0, void 0, function* () {
+        cancelSortedCheck(boxes);
         if (checkSort(boxes)) {
+            yield playSortedCheck(boxes);
             return;
         }
         for (let a = 0; a < boxes.length; a++) {
@@ -25,16 +27,13 @@ export function normalSort(boxes) {
                     boxes[a] = boxes[b];
                     boxes[b] = temp;
                     updateBoxPositions(boxes);
-                    // updateValidPositions(boxes)
-                    clear();
-                    for (const box of boxes) {
-                        box.draw(ctx);
-                    }
+                    drawBoxesNow(boxes);
                     yield sleep(normalSpeed);
                 }
                 yield sleep(normalSpeed);
             }
         }
+        yield playSortedCheck(boxes);
     });
 }
 // Sorting function:

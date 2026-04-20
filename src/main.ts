@@ -126,6 +126,49 @@ export function updateValidPositions(boxes: Box[]) {
         boxes[i]!.validPosition = boxes[i]!.value === i + 1;
     }
 }
+let sortedCheckRun = 0;
+function sleep(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+export function drawBoxesNow(boxes: Box[]) {
+    clear()
+    for (const box of boxes){
+        box.draw(ctx!);
+    }
+}
+export function cancelSortedCheck(boxes?: Box[]) {
+    sortedCheckRun++;
+
+    if (boxes) {
+        for (const box of boxes) {
+            box.validPosition = false;
+        }
+        drawBoxesNow(boxes);
+    }
+}
+export async function playSortedCheck(boxes: Box[], delay = 120) {
+    const runId = ++sortedCheckRun;
+    for (const box of boxes) {
+        box.validPosition = false;
+    }
+    drawBoxesNow(boxes);
+
+    if(!checkSort(boxes)){
+        return;
+    }
+
+    for (let i = 0; i < boxes.length; i++) {
+        if (runId !== sortedCheckRun) {
+            return;
+        }
+        boxes[i]!.validPosition = true;
+        drawBoxesNow(boxes);
+        await sleep(delay);
+        delay -= i
+    }
+}
+
+
 setUpRandomize(randomizedArray)
 updateBoxPositions(randomizedArray)
 for (const box of randomizedArray) {
