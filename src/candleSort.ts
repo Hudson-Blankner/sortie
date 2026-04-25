@@ -13,11 +13,13 @@ export async function candleSort (boxes: Box[]){
             boxes[i]!.value = sortedArray[i]!.value;
         }
         if (boxes[i]!.value <= sortedArray[i]!.value){
-            //for (let i = 0; i<randomizedArray.length; i++){
+            for (let a = 0; a<randomizedArray.length; a++){
                 //fix this, it does it for everything and doesnt exclude the initial box
-               // const subtractAmount = boxes[i-1]!.value - boxes[i]!.value;
-              //  boxes[i]!.value = boxes[i]!.value - subtractAmount;
-           // }
+                if (a != i && a != 0){
+                    const subtractAmount = boxes[a-1]!.value - boxes[a]!.value;
+                    boxes[a]!.value = boxes[a]!.value - subtractAmount;
+                }
+            }
         }
         updateBoxPositions(boxes)
         drawBoxesNow(boxes)
